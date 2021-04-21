@@ -28,9 +28,9 @@ extension AppDelegate {
         case "save_in_secured_storage":
             if let keyValue = call.arguments as? RawJsonFormat,
                let key = keyValue.first?.key as? String,
-               let value = keyValue.first?.value as? String {
-
-                let result = KeyChain.save(key: key, data: Data(from: value))
+               let value = keyValue.first?.value as? String,
+               let valueData = value.data(using: String.Encoding.utf8) {
+                let result = KeyChain.save(key: key, data: valueData)
                 AppLogger.log(result)
                 resultString = 👍
             } else {
@@ -39,11 +39,10 @@ extension AppDelegate {
         case "load_from_secured_storage":
             if let keyValue = call.arguments as? RawJsonFormat, let key = keyValue.first?.key as? String {
                 let defaultValue = keyValue.first?.value as? String
-
                 let value: String?
 
                 if let receivedData = KeyChain.load(key: key) {
-                    value = receivedData.to(type: String.self)
+                    value = String(data: receivedData, encoding: String.Encoding.utf8)
                     AppLogger.log("loaded: \(value ?? "")")
                 } else {
                     value = nil
@@ -125,17 +124,5 @@ class KeyChain {
 
         let swiftString: String = cfStr as String
         return swiftString
-    }
-}
-
-extension Data {
-
-    init<T>(from value: T) {
-        var value = value
-        self.init(buffer: UnsafeBufferPointer(start: &value, count: 1))
-    }
-
-    func to<T>(type: T.Type) -> T {
-        return self.withUnsafeBytes { $0.load(as: T.self) }
     }
 }

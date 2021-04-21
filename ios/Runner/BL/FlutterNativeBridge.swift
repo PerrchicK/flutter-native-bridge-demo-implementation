@@ -69,14 +69,11 @@ extension AppDelegate {
 extension FlutterViewController {
     static var FlutterMethodChannelName: String = "com.example.MethodChannelDemo/native_channel"
     func observeMethodChannel(onFlutterCall: @escaping ((FlutterMethodCall, @escaping FlutterResult) -> Void)) {
-        let methodChannel = FlutterMethodChannel(name: FlutterViewController.FlutterMethodChannelName, binaryMessenger: self.binaryMessenger)
-
-        methodChannel.setMethodCallHandler(onFlutterCall)
+        AppDelegate.shared.methodChannel.setMethodCallHandler(onFlutterCall)
     }
 
     func callFlutter(methodName: String, arguments: Any? = nil, callback: CallbackClosure<Any?>? = nil) {
-        let methodChannel = FlutterMethodChannel(name: FlutterViewController.FlutterMethodChannelName, binaryMessenger: self.binaryMessenger)
-        methodChannel.invokeMethod(methodName, arguments: arguments) { (callbackData) in
+        AppDelegate.shared.methodChannel.invokeMethod(methodName, arguments: arguments) { (callbackData) in
             AppLogger.log("method: \(methodName) returned: \(String(describing: callbackData))")
             callback?(callbackData)
         }

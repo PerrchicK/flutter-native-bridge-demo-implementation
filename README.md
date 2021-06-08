@@ -1,18 +1,9 @@
-# Flutter-Native Bridge Demo Implementation
+# An implementation for a Flutter-Native bridging demo
 
-This Flutter project helped us do demonstrate the implementation to achieve Flutter-Native (and vice versa) communication.
+This Flutter project helped us do demonstrate the implementation that achieves Flutter-Native (and vice versa) communication.
 
-## Getting Started
-
-This project is a starting point for a Flutter application with method channel (native bridge).
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Video clip
+Our explanations, demonstrations, mistakes (and fixes) are recorded and uploaded to YouTube, it all can be found here: https://youtu.be/RhMF7BVOLtI
 
 Enjoy :)
+Perry & Dor
